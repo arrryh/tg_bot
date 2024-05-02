@@ -111,10 +111,12 @@ async def course_detail(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     keyboard = section_keyboard
     reply_markup = InlineKeyboardMarkup(keyboard)
     await query.edit_message_text(
-        text=f'Курс по: {course.name}', reply_markup=reply_markup
+        text=f'Курс по: {course.name} \n {course.text}', reply_markup=reply_markup
     )
     return START_ROUTES
 
+async def section_detail(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Show new choice of buttons"""
 
 def main() -> None:
     """Run the bot."""
