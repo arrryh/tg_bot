@@ -74,9 +74,14 @@ class Course:
     
     def get_back_button(self):
         return InlineKeyboardButton('Назад', callback_data=self.route_key)
+
+    def get_forward_button(self):
+        return InlineKeyboardButton('Вперёд', callback_data=self.route_key)
     
     def get_section_of_string(self, string):
         pk = get_id_of_str(string, Section.key)
+
+        print('id_str', pk)
 
         return get_item_of_list_by_id(self.sections, pk)
 
@@ -115,6 +120,8 @@ def get_item_of_list_by_id(items: list, pk: int):
 
 def get_course_by_course_key(course_key):
     pk = get_id_of_str(course_key, Course.key)
+
+    print('pk', pk)
 
     return get_item_of_list_by_id(COURSES, pk)
 
@@ -168,6 +175,16 @@ async def section_detail(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             course.get_back_button()
         ]
     ]
+
+    # next_section = get_item_of_list_by_id(COURSES.sections, (section.id + 1))
+    
+    # if next_section in Course.sections:
+    #     section_keyboard = [
+    #     [
+    #         course.get_forward_button()
+    #     ]
+    #     ]
+        
 
     await query.answer()
     keyboard = section_keyboard
